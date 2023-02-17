@@ -9,9 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-messaging.js"></script>
-    <!-- <script src="/static/js/firebase-messaging-sw.js"></script>
-
-     -->
+    {% comment %} <!-- <script src="/static/js/firebase-messaging-sw.js"></script>--> {% endcomment %}
 
      <script>
       const firebaseConfig = {
@@ -33,7 +31,6 @@
         // public vapid key
         messaging.getToken({ vapidKey: '{{vapid_key}}' }).then((currentToken) => {
         if (currentToken) {
-          
           console.log(currentToken)
         } else {
           console.log('No registration token available. Request permission to generate one.');

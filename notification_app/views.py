@@ -14,6 +14,8 @@ def send_notification(registration_ids , message_title , message_body, message_s
     }
 
     payload = {
+        # we can use "to" for single device notification
+        # "to": registration_id
         "registration_ids" :registration_ids,
         "priority" : "high",
         "notification" : {
@@ -36,16 +38,24 @@ def index(request):
     context['vapid_key'] = vapid_key
     return render(request , 'index.html', context)
 
+
 def send(request, fcm_notification_device_key):
     device_registration  = [
         fcm_notification_device_key
     ]
-    send_notification(device_registration , 'This is the Message Title' , 'This is the Message Body', 'This is the Message Subtitle')
+    send_notification(
+        device_registration , 
+        'query raised' , 
+        '''A query has been raised in your area of expertise. Assist the learner and earn points.
+Prajjwal Sharma has asked you a query.
+Can you solve his/her doubt in bentley microstation?
+"test query"'''
+        , 'This is the Message Subtitle')
     return HttpResponse("Sent ")
 
 def showFirebaseJS(request):
-    data='importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js");' \
-         'importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js"); ' \
+    data='importScripts("https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js");' \
+         'importScripts("https://www.gstatic.com/firebasejs/8.6.3/firebase-messaging.js"); ' \
          'var firebaseConfig = {' \
          '        apiKey: "AIzaSyBUpL5bR5VjKaM7uOwlrlWyRtFpCFlgiEs",' \
          '        authDomain: "pushnotification-test-3fa8c.firebaseapp.com",' \
